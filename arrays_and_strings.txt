@@ -1,0 +1,387 @@
+/****************************************************************************/
+/*This Program prints and sorts an array.                                   */
+/****************************************************************************/
+
+#include<stdio.h>
+
+//function prototype
+void read_array(int arrayA[], int n);
+void display_array(int arrayA[], int n);
+void sort_array(int arrayA[], int n);
+
+int main()
+{
+    //Declaration
+    int size;
+
+    //user input array size
+    printf("Enter the desired size of the array: ");
+    scanf("%d", &size);
+    //the size of the array is declared after getting size from user
+    int arrayA[size];
+
+    //call functions
+    read_array(arrayA, size);
+
+    printf("\nThe elements of the array are: \n");
+    display_array(arrayA, size);
+
+    sort_array(arrayA, size);
+
+    printf("\nThe elements of the array after the interchange are: \n");
+    display_array(arrayA, size);
+
+    return 0;
+}
+
+
+void read_array(int arrayA[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter a number for position %d: ", i);
+        scanf("%d", &arrayA[i]);
+    }
+}
+
+
+void display_array(int arrayA[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        printf("arr[%d] = %d   ", i, arrayA[i]);
+    }
+    printf("\n");
+}
+
+
+void sort_array(int arrayA[], int n)
+{
+    for(int i = 0; i < n-1; i++)
+    {
+        for(int j = 0; j < n-1; j++)
+        {
+            if(arrayA[j] < arrayA[j+1])
+            {
+                int t = arrayA[j+1];
+                arrayA[j+1] = arrayA[j];
+                arrayA[j] = t;
+            }
+        }
+    }
+}
+
+
+
+
+/****************************************************************************/
+/*This Program finds the largest and second largest number in an array.     */
+/****************************************************************************/
+
+#include<stdio.h>
+
+//function prototype
+void read_array(int arrayA[], int n);
+void display_array(int arrayA[], int n);
+void findnum_array(int arrayA[], int n);
+
+int main()
+{
+    //Declaration
+    int size;
+
+    //user input array size
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &size);
+    //the size of the array is declared after getting size from user
+    int arrayA[size];
+
+    //call functions
+    read_array(arrayA, size);
+    display_array(arrayA, size);
+
+    findnum_array(arrayA, size);
+
+    return 0;
+}
+
+
+void read_array(int arrayA[], int n)
+{
+    printf("\n");
+    for(int i = 0; i < n; i++)
+    {
+        printf("Enter the number: ");
+        scanf("%d", &arrayA[i]);
+    }
+}
+
+
+void display_array(int arrayA[], int n)
+{
+    printf("\nThe numbers you entered are: ");
+
+    for(int i = 0; i < n; i++)
+    {
+        printf("%d  ", arrayA[i]);
+    }
+    printf("\n");
+}
+
+
+void findnum_array(int arrayA[], int n)
+{
+    int largestNum, secondLargest;
+    for(int i = 0; i < n-1; i++)
+    {
+        for(int j = 0; j < n-1; j++)
+        {
+            if(arrayA[j] < arrayA[j+1])
+            {
+                int t = arrayA[j+1];
+                arrayA[j+1] = arrayA[j];
+                arrayA[j] = t;
+            }
+        }
+    }
+    largestNum = arrayA[0];
+    secondLargest = arrayA[1];
+
+    printf("The largest of these numbers is: %d", largestNum);
+    printf("\nThe second largest of these numbers is: %d", secondLargest);
+}
+
+
+
+
+/****************************************************************************/
+/*This Program decides if there are duplicates in an array.                 */
+/****************************************************************************/
+
+#include<stdio.h>
+
+//function prototype
+void read_array(int arrayA[], int n);
+void display_array(int arrayA[], int n);
+int findduplicates(int arrayA[], int n);
+
+int main()
+{
+    //Declaration
+    int size;
+
+    //user input array size
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &size);
+    //the size of the array is declared after getting size from user
+    int arrayA[size];
+
+    //call functions
+    read_array(arrayA, size);
+    display_array(arrayA, size);
+
+    findduplicates(arrayA, size);
+
+    return 0;
+}
+
+
+void read_array(int arrayA[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        scanf("%d", &arrayA[i]);
+    }
+}
+
+
+void display_array(int arrayA[], int n)
+{
+    printf("\nThe numbers you entered are: ");
+
+    for(int i = 0; i < n; i++)
+    {
+        printf("%d  ", arrayA[i]);
+    }
+    printf("\n");
+}
+
+
+int findduplicates(int arrayA[], int n)
+{
+    int foundDuplicate = 0, search; //start with no duplicates found
+    for(int i = 0; i < n-1; i++) //starts at position a
+    {
+        for(int j = i+1; j < n; j++) //starts at position b
+        {
+            if(arrayA[i] == arrayA[j])
+            {
+                printf("Duplicate number %d found at location %d and %d", arrayA[i], i, j);
+                search = foundDuplicate; //if a duplicate is found, foundDuplicate is true
+            }
+        }
+    }
+
+    //if no duplicates are found, foundDuplicate becomes false
+    if(search != foundDuplicate)
+    {
+        return -1;
+    }
+}
+
+
+
+
+/****************************************************************************/
+/*This Program reads, print text, and counts total character until * is     */
+/*encountered.                                                              */
+/****************************************************************************/
+
+#include<stdio.h>
+
+
+int main()
+{
+    printf("Enter * to end \nEnter the text : ");
+
+    //Declaration
+    char str[100], ch = getchar();
+    int i = 0;
+
+    //while the user doesn't put a *, continue counting the number of characters in the string
+    while(ch != '*')
+    {
+        str[i] = ch;
+        i++;
+        ch = getchar();
+    }
+    str[i] = '\0'; //terminates string
+
+    printf("The text is : %s", str);
+    printf("\nThe count of the characters is : %d", i);
+
+    return 0;
+}
+
+
+
+
+/****************************************************************************/
+/*This Program reads a single string and counts the total number of words.  */
+/****************************************************************************/
+
+#include<stdio.h>
+
+
+int main()
+{
+
+    //Declaration
+    char str[100];
+    int i = 0, wordCount = 0;
+
+    printf("Enter the sentence : ");
+    gets(str);
+
+    while(str[i] != '\0')
+    {
+        if(str[i] == ' ')
+        {
+            wordCount++;
+        }
+        i++;
+    }
+
+    printf("The total count of words is : %d", wordCount+1);
+
+    return 0;
+}
+
+
+
+
+/****************************************************************************/
+/*This Program replaces commas with semicolons given a string.              */
+/****************************************************************************/
+
+#include<stdio.h>
+
+
+int main()
+{
+
+    //Declaration
+    char str[100];
+    int i = 0;
+
+    printf("Enter the sentence : ");
+    gets(str);
+
+    //goes through string and replaces , with ;
+    while(str[i] != '\0')
+    {
+        if(str[i] == ',')
+        {
+            str[i] = ';';
+        }
+        i++;
+    }
+
+    printf("The copied text is : %s", str);
+
+    return 0;
+}
+
+
+
+
+/****************************************************************************/
+/*This Program searches and counts how many times a pattern appears in a    */
+/*string.                                                                   */
+/****************************************************************************/
+
+#include<stdio.h>
+
+
+int main()
+{
+
+    //Declaration
+    char sentence[100], pattern[100];
+    int found, patternCount = 0;
+
+    printf("Enter string : ");
+    gets(sentence);
+
+    printf("Enter the pattern : ");
+    gets(pattern);
+
+    //checking for pattern
+    for(int i = 0; sentence[i] != '\0'; i++) //position of the sentence string
+    {
+        found = 1; //flag, assume pattern exists
+        for(int j = 0; pattern[j] != '\0'; j++) //position of the pattern string
+        {
+            if(sentence[i + j] != pattern[j]) //pattern not found
+            {
+                found = 0;
+            }
+        }
+        if(found == 1) //pattern is found, count increases
+        {
+            patternCount++;
+        }
+    }
+
+    //output
+    if(patternCount > 0)
+    {
+        printf("Pattern found %d times", patternCount);
+    }
+    else
+    {
+        printf("Pattern not found");
+    }
+
+    return 0;
+}
